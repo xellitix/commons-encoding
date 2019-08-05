@@ -1,2 +1,3 @@
-# commons-encoding
-Encoding Utilities
+# XELLITIX Commons - Encoding
+
+Encoding utilities.
