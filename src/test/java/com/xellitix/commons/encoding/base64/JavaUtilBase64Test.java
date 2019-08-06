@@ -14,25 +14,76 @@ public class JavaUtilBase64Test {
 
   // Constants
   private static final String PLAIN_TEXT = "Hello, world!";
+  private static final byte[] PLAIN_BYTES = PLAIN_TEXT.getBytes();
+
   private static final String ENCODED_TEXT = "SGVsbG8sIHdvcmxkIQ==";
+  private static final byte[] ENCODED_BYTES = ENCODED_TEXT.getBytes();
 
   // Fixtures
   private JavaUtilBase64 base64;
 
   @Test
-  public void encodeText__Test() {
+  public void encode__StringToString__Test() {
     assertThat(base64
-        .encode(PLAIN_TEXT))
+        .encodeToString(PLAIN_TEXT))
         .isNotNull()
         .isEqualTo(ENCODED_TEXT);
   }
 
   @Test
-  public void decodeText__Test() {
+  public void encode__BytesToString__Test() {
     assertThat(base64
-        .decode(ENCODED_TEXT))
+        .encodeToString(PLAIN_BYTES))
+        .isNotNull()
+        .isEqualTo(ENCODED_TEXT);
+  }
+
+  @Test
+  public void encode__StringToBytes__Test() {
+    assertThat(base64
+        .encodeToBytes(PLAIN_TEXT))
+        .isNotNull()
+        .isEqualTo(ENCODED_BYTES);
+  }
+
+  @Test
+  public void encode_BytesToBytes__Test() {
+    assertThat(base64
+        .encodeToBytes(PLAIN_BYTES))
+        .isNotNull()
+        .isEqualTo(ENCODED_BYTES);
+  }
+
+  @Test
+  public void decode__StringToString__Test() {
+    assertThat(base64
+        .decodeToString(ENCODED_TEXT))
         .isNotNull()
         .isEqualTo(PLAIN_TEXT);
+  }
+
+  @Test
+  public void decode__BytesToString__Test() {
+    assertThat(base64
+        .decodeToString(ENCODED_BYTES))
+        .isNotNull()
+        .isEqualTo(PLAIN_TEXT);
+  }
+
+  @Test
+  public void decode__StringToBytes__Test() {
+    assertThat(base64
+        .decodeToBytes(ENCODED_TEXT))
+        .isNotNull()
+        .isEqualTo(PLAIN_BYTES);
+  }
+
+  @Test
+  public void decode_BytesToBytes__Test() {
+    assertThat(base64
+        .decodeToBytes(ENCODED_BYTES))
+        .isNotNull()
+        .isEqualTo(PLAIN_BYTES);
   }
 
   @Before
